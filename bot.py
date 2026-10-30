@@ -178,8 +178,14 @@ def montar_resposta_cotacao(user_data: dict, fipe_escolhida: dict) -> str:
     
     link_wa = f"https://wa.me/{tel}?text={urllib.parse.quote(texto_zap)}"
 
+    # Linha formatada para a agenda: Nome em maiúsculo + Modelo + Ano + Placa
+    # O uso de crases `texto` no Telegram permite copiar com 1 toque no celular
+    contato_agenda = f"{nome.upper()} {modelo_fipe.upper()} {ano_mod} {placa}"
+
     return (
         f"📋 *Cotação para {modelo_fipe} {ano_mod} ({codigo_fipe}) de {nome}:*\n\n"
+        f"📇 *Salvar contato (toque para copiar):*\n"
+        f"`{contato_agenda}`\n\n"
         f"🚗 *Veículo:* {marca} / {modelo_fipe}\n"
         f"📅 *Ano:* {ano_fab} / {ano_mod}\n"
         f"🔢 *Placa:* {placa}\n\n"
@@ -190,6 +196,7 @@ def montar_resposta_cotacao(user_data: dict, fipe_escolhida: dict) -> str:
         f"⚡ *Valor com desconto:* {valor_desc}\n\n"
         f"📲 *Mandar primeira mensagem:*\n{link_wa}"
     )
+
 
 # --- HANDLERS DO TELEGRAM ---
 
